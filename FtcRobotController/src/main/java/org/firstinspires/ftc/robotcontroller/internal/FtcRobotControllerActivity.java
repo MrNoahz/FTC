@@ -40,7 +40,6 @@ import android.content.ServiceConnection;
 import android.content.res.Configuration;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
-import android.media.MediaPlayer;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -89,7 +88,6 @@ import com.qualcomm.robotcore.wifi.NetworkType;
 import com.qualcomm.robotcore.wifi.WifiDirectAssistant;
 
 import org.firstinspires.ftc.ftccommon.external.SoundPlayingRobotMonitor;
-import org.firstinspires.ftc.robotcontroller.internal.util.Accelerometer;
 import org.firstinspires.ftc.robotcontroller.internal.util.Expression;
 import org.firstinspires.ftc.robotcontroller.internal.util.FaceView;
 import org.firstinspires.ftc.robotcore.internal.AppUtil;
@@ -146,14 +144,6 @@ public class FtcRobotControllerActivity extends Activity {
                                             Expression.HAPPY,
                                             Expression.MAD,
                                             Expression.SAD };
-
-    private MediaPlayer mediaplayer;
-
-    private Accelerometer accelerometer;
-
-    public Accelerometer getAccelerometer() {
-        return accelerometer;
-    }
 
     protected class RobotRestarter implements Restarter {
 
@@ -273,7 +263,8 @@ public class FtcRobotControllerActivity extends Activity {
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
-        WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        //WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
         wifiLock = wifiManager.createWifiLock(WifiManager.WIFI_MODE_FULL_HIGH_PERF, "");
 
         hittingMenuButtonBrightensScreen();
@@ -285,8 +276,6 @@ public class FtcRobotControllerActivity extends Activity {
         wifiLock.acquire();
         callback.networkConnectionUpdate(WifiDirectAssistant.Event.DISCONNECTED);
         bindToService();
-
-        accelerometer = new Accelerometer();
 
         //Log.i("Accelerometer", "X: " + Float.toString(accelerometer.getX()));
     }
@@ -329,10 +318,6 @@ public class FtcRobotControllerActivity extends Activity {
         super.onResume();
         RobotLog.vv(TAG, "onResume()");
         readNetworkType(NETWORK_TYPE_FILENAME);
-
-        accelerometer = new Accelerometer();
-        accelerometer.registerListener(this);
-
     }
 
     @Override
@@ -342,8 +327,6 @@ public class FtcRobotControllerActivity extends Activity {
         if (programmingModeController.isActive()) {
             programmingModeController.stopProgrammingMode();
         }
-
-        accelerometer.unregisterListener(this);
     }
 
     @Override
@@ -578,15 +561,5 @@ public class FtcRobotControllerActivity extends Activity {
 
     public void setFace(int i) {
         face.setExpression(expressionList[i]);
-    }
-
-    public void playSound(int i) {
-        if(mediaplayer != null) {
-            mediaplayer.release();
-            mediaplayer = null;
-        }
-
-        mediaplayer = MediaPlayer.create(FtcRobotControllerActivity.this, i);
-        mediaplayer.start();
     }
 }

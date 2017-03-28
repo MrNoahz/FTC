@@ -132,7 +132,7 @@ public class TestDriveOp extends LinearOpMode {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        activity.playSound((int) AudioList.list[currentVoice][1]);
+                        //activity.playSound((int) AudioList.list[currentVoice][1]);
                     }
                 });
 

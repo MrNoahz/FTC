@@ -1,0 +1,50 @@
+package org.firstinspires.ftc.robotcontroller.internal.util;
+
+import com.qualcomm.ftcrobotcontroller.R;
+
+public class AudioList {
+    public static Object[][] list = {
+            { "Hello", R.raw.hello },
+            { "Oh Hi", R.raw.ohhi },
+            { "Oh it's you", R.raw.ohitsyou },
+            { "I know you", R.raw.iknowyou },
+            { "So how are you holding up?", R.raw.sohowareyouholdingup },
+            { "Because I'm a potato", R.raw.becauseimapotato },
+            { "Goodbye", R.raw.goodbye },
+            { "Goodbye Sir", R.raw.goodbyesir },
+            { "I know you", R.raw.iknowyou },
+            { "One moment", R.raw.onemoment },
+            { "Oh my god", R.raw.ohmygod },
+            { "Yes", R.raw.yes },
+            { "No", R.raw.no },
+            { "Sorry", R.raw.sorry },
+            { "Where are you?", R.raw.whereareyou },
+            { "Surprise", R.raw.suprise },
+            { "Nononono", R.raw.nononono },
+            { "Ahhh", R.raw.ahhhh },
+            { "Are you even listening to me?", R.raw.areyouevenlisteningtome },
+            { "Burn his house down", R.raw.burnhishousedown },
+            { "For instance, the floor here will kill you", R.raw.forinstancethefloorherewillkillyou },
+            { "Don't you dare plug me in", R.raw.dontyoudareplughimin },
+            { "Go ahead and plug me in", R.raw.goaheadplugmein },
+            { "I sincerely hope you weren't expecting a response", R.raw.isincerelyhopeyouwerentexpectingaresponse },
+            { "This is not good", R.raw.thisisnotgood },
+            { "Oh I'm going to kill you", R.raw.ohimgoingtokillyou },
+            { "I'm not kidding now", R.raw.imnotkiddingnow },
+            { "The engineers tried everything to make me behave", R.raw.theengineerstriedeverythingtomakemebehave },
+            { "Get your hands off me", R.raw.getyourhandsoffme },
+            { "Just stop it already", R.raw.juststopitalready },
+            { "Hey Moron", R.raw.heymoron },
+            { "Nice job breaking it hero", R.raw.nicejobbreakingithero },
+            { "Ugh I hate you", R.raw.ughihateyou },
+            { "You are kidding me", R.raw.youarekiddingme },
+            { "You're not a good person", R.raw.yourenotagoodperson },
+            { "You don't even care do you?", R.raw.youdontevencaredoyou },
+            { "You're not smart", R.raw.yourenotsmart },
+            { "You didn't do anything", R.raw.youdidntdoanything },
+            { "Your entire life has been a mathematical error", R.raw.youreentirelifehasbeenamathematicalerror },
+            { "You've been wrong about ever single thing you've ever done", R.raw.youvebeenwrongabouteverysinglethingyouveeverdone },
+            { "All your other friends coudln't come either", R.raw.allyourotherfriendscouldntcomeeither },
+            { "Stop squirming and die like an adult", R.raw.stopsquirminganddielikeanadult }
+    };
+}

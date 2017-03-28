@@ -1,0 +1,24 @@
+body {
+    background: black;
+
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    /*display: flex;
+    justify-content: center;
+    align-items: flex-end;*/
+}
+
+.eye {
+	display: block;
+
+    width: 90px;
+    height: 90px;
+    
+    background: blue;
+    
+    border-radius: 20px;
+    margin: 10px;
+}

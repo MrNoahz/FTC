@@ -1,4 +1,4 @@
-include ':FtcRobotController', ':BoxTool'
+include ':FtcRobotController'
 include ':Team11342'
 include ':Team10940'
 include ':TeamResearch'

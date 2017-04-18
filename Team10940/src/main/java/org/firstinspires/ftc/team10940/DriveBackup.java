@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.team10940;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -36,9 +37,9 @@ import org.firstinspires.ftc.team10940.util.MotorFailureTester;
  * X and Y for both controllers will say "Shalom" and "Wake me up inside" using Noah's fancy new Oratio library
  */
 
-@TeleOp(name="Apostrophe", group="apostrophe")
-//@Disabled
-public class ApostropheDriveOp extends LinearOpMode implements ControllerListener, MotorFailure {
+@TeleOp(name="Apostrophe Backup", group="apostrophe")
+@Disabled
+public class DriveBackup extends LinearOpMode implements ControllerListener, MotorFailure {
 
     /* Declare Resources */
     private ApostropheHardware robot    = new ApostropheHardware();  // Use Apostrophe's Hardware
@@ -50,11 +51,16 @@ public class ApostropheDriveOp extends LinearOpMode implements ControllerListene
     // Currently TESTING
     private MotorFailureTester failureTester;
 
+    // To be removed
+    private boolean buttons[];
+
     private int spinnerOn;      // Toggle for spinner power
     private boolean spinnerDir; // Toggle for spinner direction. True = forward. False = backward.
     private boolean lifterDir;  // Toggle for lifter direction
 
-    private int lastTime;
+    private int motorPercent;   // Motor speed percentage for finer control
+
+    //TODO Switch to constant speed rather than constant power for the launcher.
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -70,25 +76,27 @@ public class ApostropheDriveOp extends LinearOpMode implements ControllerListene
         orator = new Orator((FtcRobotControllerActivity) hardwareMap.appContext);
 
         // Currently TESTING
-        failureTester = new MotorFailureTester(this, runtime);
+        //failureTester = new MotorFailureTester(this, runtime);
 
         // Currently TESTING
-        initEncoders();
+        //initEncoders();
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
         runtime.reset(); // Resets runtime counter on start
-        looptime.reset();
 
         // Must be called after waitForStart()
-        handler = new ControllerHandler(); // Initialize handler for button listener
-        handler.registerListener(this);    // Register the listener using the actionPerformed function
+
+        //To be removed
+        buttons = new boolean[5];
 
         spinnerOn  = 0;    // Spinner defaults as off
         spinnerDir = true; // Spinner direction defaults as forward
 
         lifterDir = true;  // Lifter direction defaults as up
+
+        motorPercent = 100; // Motor defaults to full power
 
         // Run util the end of the match (driver presses STOP)
         while(opModeIsActive()) {
@@ -96,15 +104,70 @@ public class ApostropheDriveOp extends LinearOpMode implements ControllerListene
             looptime.reset();
 
             // Run wheels in tank mode (note: The joystick goes negative when pushed forward, so negate it)
-            robot.leftMotor.setPower(-gamepad1.left_stick_y);    // Multiplies speed by motor speed percentage
-            robot.rightMotor.setPower(-gamepad1.right_stick_y);  // Same ^
+            robot.leftMotor.setPower(-gamepad1.left_stick_y * (motorPercent / 100));    // Multiplies speed by motor speed percentage
+            robot.rightMotor.setPower(-gamepad1.right_stick_y * (motorPercent / 100));  // Same ^
 
             // Sets spinner to the spinnerOn toggle
             robot.spinny.setPower(spinnerOn);
 
+            //TODO remove below if works
+//            if(gamepad2.a && !buttons[0]) {
+//                spinnerOn = 1 - spinnerOn;
+//                robot.spinny.setPower(spinnerOn);
+//
+//                buttons[0] = true;
+//            } else if(!gamepad2.a) {
+//                buttons[0] = false;
+//            }
+//
+//            if(gamepad2.b && !buttons[1]) {
+//                spinnerDir = !spinnerDir;
+//
+//                if(spinnerDir)
+//                    robot.spinny.setDirection(DcMotorSimple.Direction.REVERSE);
+//                else
+//                    robot.spinny.setDirection(DcMotorSimple.Direction.FORWARD);
+//
+//                buttons[1] = true;
+//            } else if(!gamepad2.b) {
+//                buttons[1] = false;
+//            }
+
             // If right bumper is pressed, set to 0.75 power. Else, 0
-            // robot.lifty.setPower((gamepad2.right_bumper) ? 0.75 : 0);
-            robot.lifty.setPower((gamepad2.left_stick_y) * 0.5);
+//            robot.lifty.setPower((gamepad2.right_bumper) ? 0.75 : 0);
+            robot.lifty.setPower((gamepad2.left_stick_y) * 0.8);
+
+            //TODO remove if works
+//            if(gamepad2.left_bumper && !buttons[2]) {
+//                lifterDir = !lifterDir;
+//
+//                if(lifterDir)
+//                    robot.lifty.setDirection(DcMotorSimple.Direction.REVERSE);
+//                else
+//                    robot.lifty.setDirection(DcMotorSimple.Direction.FORWARD);
+//
+//                buttons[2] = true;
+//            } else if(!gamepad2.left_bumper) {
+//                buttons[2] = false;
+//            }
+
+//            if(gamepad2.dpad_up && !buttons[3]) {
+//                if(motorPercent < 100)
+//                    motorPercent += 5;
+//
+//                buttons[3] = true;
+//            } else if(!gamepad2.dpad_up) {
+//                buttons[3] = false;
+//            }
+
+//            if(gamepad2.dpad_down && !buttons[4]) {
+//                if(motorPercent > 0)
+//                    motorPercent -= 5;
+//
+//                buttons[4] = true;
+//            } else if(!gamepad2.dpad_down) {
+//                buttons[4] = false;
+//            }
 
             /* Trigger point is 0.8
              * If right or left trigger exceeds trigger point, change the direction
@@ -123,11 +186,13 @@ public class ApostropheDriveOp extends LinearOpMode implements ControllerListene
                 robot.launchy.setPower(0);
             }
 
-            // Currently TESTING
-            failureTester.update(-gamepad1.left_stick_y, -gamepad1.right_stick_y, robot.leftMotor.getCurrentPosition(), robot.rightMotor.getCurrentPosition());
+            telemetry.addData("Speed", motorPercent); // Log the motor speed
 
+//            // Currently TESTING
+//            failureTester.update(-gamepad1.left_stick_y, -gamepad1.right_stick_y, robot.leftMotor.getCurrentPosition(), robot.rightMotor.getCurrentPosition());
+//
             handler.update(gamepad1, gamepad2); // Update the handler
-            telemetry.addData("Cycle time", looptime.seconds());
+//            telemetry.addData("Cycle time", looptime.milliseconds());
             telemetry.update();                 // Update telemetry
 
             idle(); // Yields thread to give other threads a chance to run
@@ -154,7 +219,20 @@ public class ApostropheDriveOp extends LinearOpMode implements ControllerListene
         // Filter out all events that aren't from Gamepad1 and BUTTON_RELEASED
         if(gt == GamepadType.GAMEPAD1 && et == EventType.BUTTON_RELEASED) {
             switch(en) {
-
+                case DPAD_UP:
+                    // If DPAD_UP is pressed on Gamepad1 then it will increase the motor speed by 5%
+                    if(motorPercent < 100) motorPercent += 5;
+                    break;
+                case DPAD_DOWN:
+                    // If DPAD_DOWN is pressed on Gamepad1 then it will decrease the motor speed by 5%
+                    if(motorPercent > 0) motorPercent -= 5;
+                    break;
+                case DPAD_RIGHT:
+                    if(motorPercent <= 80) motorPercent += 20;
+                    break;
+                case DPAD_LEFT:
+                    if(motorPercent >= 20) motorPercent -= 20;
+                    break;
             }
         }
 

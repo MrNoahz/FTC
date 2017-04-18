@@ -28,6 +28,8 @@ public class PunctuationHolonomicHardware {
     public DcMotor motor2;
     public DcMotor motor3;
 
+    public DcMotor spinny;
+
     private HardwareMap hwMap;
 
     public void init(HardwareMap hMap) {
@@ -38,15 +40,21 @@ public class PunctuationHolonomicHardware {
         motor2 = hwMap.dcMotor.get("motor2");
         motor3 = hwMap.dcMotor.get("motor3");
 
+        spinny = hwMap.dcMotor.get("spinny");
+
         motor0.setPower(0);
         motor1.setPower(0);
         motor2.setPower(0);
         motor3.setPower(0);
 
+        spinny.setPower(0);
+
         motor0.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        spinny.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         setDirection(0);
 

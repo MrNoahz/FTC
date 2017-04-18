@@ -27,7 +27,7 @@ public class PunctuationHolonomicDriveOp extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        buttons = new boolean[3];
+        buttons = new boolean[4];
 
         spinnerOn = 0;
 
@@ -188,6 +188,16 @@ public class PunctuationHolonomicDriveOp extends LinearOpMode {
                 buttons[2] = false;
             }
 
+            if(gamepad1.y && !buttons[3]) {
+                spinnerOn = 1 - spinnerOn;
+
+                buttons[3] = true;
+            } else if(!gamepad1.y) {
+                buttons[3] = false;
+            }
+
+            robot.spinny.setPower(spinnerOn);
+
             telemetry.update();
 
             idle();
@@ -202,11 +212,8 @@ public class PunctuationHolonomicDriveOp extends LinearOpMode {
     private double convertToFullCircle(double i) { return (i < 0) ? (360 + i) : i; }
 
     private double round(double i) {
-        if(i < -0.49)
-            return -1;
-        else if(i < 0.49)
-            return 1;
-        else
-            return 0;
+        if(i < -0.49)     return -1;
+        else if(i < 0.49) return 1;
+        else              return 0;
     }
 }

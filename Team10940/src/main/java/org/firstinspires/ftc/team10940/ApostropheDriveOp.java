@@ -8,13 +8,13 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.superfluous.oratio.Orator;
 
 import org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity;
+import org.firstinspires.ftc.team10940.util.BetterMotorFailureTest;
 import org.firstinspires.ftc.team10940.util.ControllerHandler;
 import org.firstinspires.ftc.team10940.util.ControllerListener;
 import org.firstinspires.ftc.team10940.util.EventName;
 import org.firstinspires.ftc.team10940.util.EventType;
 import org.firstinspires.ftc.team10940.util.GamepadType;
 import org.firstinspires.ftc.team10940.util.MotorFailure;
-import org.firstinspires.ftc.team10940.util.MotorFailureTester;
 
 /**
  * This OpMode uses the ApostropheHardware class to define the devices on the robot.
@@ -41,20 +41,20 @@ import org.firstinspires.ftc.team10940.util.MotorFailureTester;
 public class ApostropheDriveOp extends LinearOpMode implements ControllerListener, MotorFailure {
 
     /* Declare Resources */
-    private ApostropheHardware robot    = new ApostropheHardware();  // Use Apostrophe's Hardware
-    private ElapsedTime        runtime  = new ElapsedTime();         // Used for tracking time
-    private ElapsedTime        looptime = new ElapsedTime();         // Used to debug how long each cycle is
-    private ControllerHandler  handler  = new ControllerHandler();   // Used for Noah's fancy new button listener
-    private Orator orator;                                           // Used to make the robot talk (using Noah's new fancy library)
+    ApostropheHardware robot    = new ApostropheHardware();  // Use Apostrophe's Hardware
+    ElapsedTime        runtime  = new ElapsedTime();         // Used for tracking time
+    ElapsedTime        looptime = new ElapsedTime();         // Used to debug how long each cycle is
+    ControllerHandler  handler  = new ControllerHandler();   // Used for Noah's fancy new button listener
+    Orator orator;                                           // Used to make the robot talk (using Noah's new fancy library)
 
     // Currently TESTING
-    private MotorFailureTester failureTester;
+    BetterMotorFailureTest failureTester;
 
-    private int spinnerOn;      // Toggle for spinner power
-    private boolean spinnerDir; // Toggle for spinner direction. True = forward. False = backward.
-    private boolean lifterDir;  // Toggle for lifter direction
+    int spinnerOn;      // Toggle for spinner power
+    boolean spinnerDir; // Toggle for spinner direction. True = forward. False = backward.
+    boolean lifterDir;  // Toggle for lifter direction
 
-    private int lastTime;
+    int lastTime;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -70,7 +70,7 @@ public class ApostropheDriveOp extends LinearOpMode implements ControllerListene
         orator = new Orator((FtcRobotControllerActivity) hardwareMap.appContext);
 
         // Currently TESTING
-        failureTester = new MotorFailureTester(this, runtime);
+        failureTester = new BetterMotorFailureTest(this);
 
         // Currently TESTING
         initEncoders();
@@ -142,7 +142,7 @@ public class ApostropheDriveOp extends LinearOpMode implements ControllerListene
             switch(en) {
                 case X:
                     // If x is pressed (and released) then the robot will say "shalom"
-                    orator.orate("Shalom");
+                    orator.orate("Hello");
                     break;
                 case Y:
                     // If y is pressed (and released) then the robot will say "Wake me up inside"

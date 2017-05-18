@@ -36,32 +36,32 @@ public class PunctuationHolonomicDriveOp extends LinearOpMode {
 
             //TODO Implement DPad support
             if(gamepad1.dpad_right) {
-                robot.motor0.setPower(-1 + gamepad1.right_stick_x);
-                robot.motor1.setPower(-1 + gamepad1.right_stick_x);
-                robot.motor2.setPower( 1 + gamepad1.right_stick_x);
-                robot.motor3.setPower( 1 + gamepad1.right_stick_x);
+                robot.frontLeftMotor.setPower(-1 + gamepad1.right_stick_x);
+                robot.frontRightMotor.setPower(-1 + gamepad1.right_stick_x);
+                robot.backRightMotor.setPower( 1 + gamepad1.right_stick_x);
+                robot.backLeftMotor.setPower( 1 + gamepad1.right_stick_x);
             } else if(gamepad1.dpad_up) {
-                robot.motor0.setPower(-1 + gamepad1.right_stick_x);
-                robot.motor1.setPower( 1 + gamepad1.right_stick_x);
-                robot.motor2.setPower( 1 + gamepad1.right_stick_x);
-                robot.motor3.setPower(-1 + gamepad1.right_stick_x);
+                robot.frontLeftMotor.setPower(-1 + gamepad1.right_stick_x);
+                robot.frontRightMotor.setPower( 1 + gamepad1.right_stick_x);
+                robot.backRightMotor.setPower( 1 + gamepad1.right_stick_x);
+                robot.backLeftMotor.setPower(-1 + gamepad1.right_stick_x);
             } else if(gamepad1.dpad_left) {
-                robot.motor0.setPower( 1 + gamepad1.right_stick_x);
-                robot.motor1.setPower( 1 + gamepad1.right_stick_x);
-                robot.motor2.setPower(-1 + gamepad1.right_stick_x);
-                robot.motor3.setPower(-1 + gamepad1.right_stick_x);
+                robot.frontLeftMotor.setPower( 1 + gamepad1.right_stick_x);
+                robot.frontRightMotor.setPower( 1 + gamepad1.right_stick_x);
+                robot.backRightMotor.setPower(-1 + gamepad1.right_stick_x);
+                robot.backLeftMotor.setPower(-1 + gamepad1.right_stick_x);
             } else if(gamepad1.dpad_down) {
-                robot.motor0.setPower( 1 + gamepad1.right_stick_x);
-                robot.motor1.setPower(-1 + gamepad1.right_stick_x);
-                robot.motor2.setPower(-1 + gamepad1.right_stick_x);
-                robot.motor3.setPower( 1 + gamepad1.right_stick_x);
+                robot.frontLeftMotor.setPower( 1 + gamepad1.right_stick_x);
+                robot.frontRightMotor.setPower(-1 + gamepad1.right_stick_x);
+                robot.backRightMotor.setPower(-1 + gamepad1.right_stick_x);
+                robot.backLeftMotor.setPower( 1 + gamepad1.right_stick_x);
             } else if(gamepad1.right_bumper) {
                 //TODO Stick Rounding Testing
 
-                robot.motor0.setPower(round( gamepad1.left_stick_y) - round(gamepad1.left_stick_x) - gamepad1.right_stick_x);
-                robot.motor1.setPower(round(-gamepad1.left_stick_y) - round(gamepad1.left_stick_x) - gamepad1.right_stick_x);
-                robot.motor2.setPower(round(-gamepad1.left_stick_y) + round(gamepad1.left_stick_x) - gamepad1.right_stick_x);
-                robot.motor3.setPower(round( gamepad1.left_stick_y) + round(gamepad1.left_stick_x) - gamepad1.right_stick_x);
+                robot.frontLeftMotor.setPower(round( gamepad1.left_stick_y) - round(gamepad1.left_stick_x) - gamepad1.right_stick_x);
+                robot.frontRightMotor.setPower(round(-gamepad1.left_stick_y) - round(gamepad1.left_stick_x) - gamepad1.right_stick_x);
+                robot.backRightMotor.setPower(round(-gamepad1.left_stick_y) + round(gamepad1.left_stick_x) - gamepad1.right_stick_x);
+                robot.backLeftMotor.setPower(round( gamepad1.left_stick_y) + round(gamepad1.left_stick_x) - gamepad1.right_stick_x);
 
 //                if(gamepad1.left_stick_x != 0 || gamepad1.left_stick_y != 0) {
 //                    double angle = convertToFullCircle(Math.atan2(gamepad1.left_stick_x, gamepad1.left_stick_y)
@@ -73,99 +73,99 @@ public class PunctuationHolonomicDriveOp extends LinearOpMode {
 //                    telemetry.addData("JoystickDistance", joystickDistance);
 //
 //                    if(angle <= 22.5 && angle >= 337.5) {
-//                        robot.motor0.setPower( joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor1.setPower( joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor2.setPower(-joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor3.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontLeftMotor.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontRightMotor.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.backRightMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.backLeftMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
 //                    } else if(angle < 67.5) {
-//                        robot.motor0.setPower( 0 + gamepad1.right_stick_x);
-//                        robot.motor1.setPower(-1 + gamepad1.right_stick_x);
-//                        robot.motor2.setPower( 0 + gamepad1.right_stick_x);
-//                        robot.motor3.setPower( 1 + gamepad1.right_stick_x);
+//                        robot.frontLeftMotor.setPower( 0 + gamepad1.right_stick_x);
+//                        robot.frontRightMotor.setPower(-1 + gamepad1.right_stick_x);
+//                        robot.backRightMotor.setPower( 0 + gamepad1.right_stick_x);
+//                        robot.backLeftMotor.setPower( 1 + gamepad1.right_stick_x);
 //                    } else if(angle < 112.5) {
-//                        robot.motor0.setPower(-joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor1.setPower(-joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor2.setPower( joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor3.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontLeftMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontRightMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.backRightMotor.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.backLeftMotor.setPower( joystickDistance + gamepad1.right_stick_x);
 //                    } else if(angle < 157.5) {
-//                        robot.motor0.setPower(-1 + gamepad1.right_stick_x);
-//                        robot.motor1.setPower( 0 + gamepad1.right_stick_x);
-//                        robot.motor2.setPower( 1 + gamepad1.right_stick_x);
-//                        robot.motor3.setPower( 0 + gamepad1.right_stick_x);
+//                        robot.frontLeftMotor.setPower(-1 + gamepad1.right_stick_x);
+//                        robot.frontRightMotor.setPower( 0 + gamepad1.right_stick_x);
+//                        robot.backRightMotor.setPower( 1 + gamepad1.right_stick_x);
+//                        robot.backLeftMotor.setPower( 0 + gamepad1.right_stick_x);
 //                    } else if(angle < 202.5) {
-//                        robot.motor0.setPower(-joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor1.setPower( joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor2.setPower( joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor3.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontLeftMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontRightMotor.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.backRightMotor.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.backLeftMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
 //                    } else if(angle < 247.5) {
-//                        robot.motor0.setPower( 0 + gamepad1.right_stick_x);
-//                        robot.motor1.setPower( 1 + gamepad1.right_stick_x);
-//                        robot.motor2.setPower( 0 + gamepad1.right_stick_x);
-//                        robot.motor3.setPower(-1 + gamepad1.right_stick_x);
+//                        robot.frontLeftMotor.setPower( 0 + gamepad1.right_stick_x);
+//                        robot.frontRightMotor.setPower( 1 + gamepad1.right_stick_x);
+//                        robot.backRightMotor.setPower( 0 + gamepad1.right_stick_x);
+//                        robot.backLeftMotor.setPower(-1 + gamepad1.right_stick_x);
 //                    } else if(angle < 292.5) {
-//                        robot.motor0.setPower( joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor1.setPower( joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor2.setPower(-joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor3.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontLeftMotor.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontRightMotor.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.backRightMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.backLeftMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
 //                    } else if(angle < 337.5) {
-//                        robot.motor0.setPower( 1 + gamepad1.right_stick_x);
-//                        robot.motor1.setPower( 0 + gamepad1.right_stick_x);
-//                        robot.motor2.setPower(-1 + gamepad1.right_stick_x);
-//                        robot.motor3.setPower( 0 + gamepad1.right_stick_x);
+//                        robot.frontLeftMotor.setPower( 1 + gamepad1.right_stick_x);
+//                        robot.frontRightMotor.setPower( 0 + gamepad1.right_stick_x);
+//                        robot.backRightMotor.setPower(-1 + gamepad1.right_stick_x);
+//                        robot.backLeftMotor.setPower( 0 + gamepad1.right_stick_x);
 //                    }
 
 //                    if(angle <= 22.5 && angle >= 337.5) {
-//                        robot.motor0.setPower(-joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor1.setPower(-joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor2.setPower( joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor3.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontLeftMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontRightMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.backRightMotor.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.backLeftMotor.setPower( joystickDistance + gamepad1.right_stick_x);
 //                    } else if(angle < 67.5) {
-//                        robot.motor0.setPower(-joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor1.setPower( 0 + gamepad1.right_stick_x);
-//                        robot.motor2.setPower( joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor3.setPower( 0 + gamepad1.right_stick_x);
+//                        robot.frontLeftMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontRightMotor.setPower( 0 + gamepad1.right_stick_x);
+//                        robot.backRightMotor.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.backLeftMotor.setPower( 0 + gamepad1.right_stick_x);
 //                    } else if(angle < 112.5) {
-//                        robot.motor0.setPower(-joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor1.setPower( joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor2.setPower( joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor3.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontLeftMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontRightMotor.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.backRightMotor.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.backLeftMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
 //                    } else if(angle < 157.5) {
-//                        robot.motor0.setPower( 0 + gamepad1.right_stick_x);
-//                        robot.motor1.setPower( joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor2.setPower( 0 + gamepad1.right_stick_x);
-//                        robot.motor3.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontLeftMotor.setPower( 0 + gamepad1.right_stick_x);
+//                        robot.frontRightMotor.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.backRightMotor.setPower( 0 + gamepad1.right_stick_x);
+//                        robot.backLeftMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
 //                    } else if(angle < 202.5) {
-//                        robot.motor0.setPower( joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor1.setPower( joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor2.setPower(-joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor3.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontLeftMotor.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontRightMotor.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.backRightMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.backLeftMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
 //                    } else if(angle < 247.5) {
-//                        robot.motor0.setPower( joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor1.setPower( 0 + gamepad1.right_stick_x);
-//                        robot.motor2.setPower(-joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor3.setPower( 0 + gamepad1.right_stick_x);
+//                        robot.frontLeftMotor.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontRightMotor.setPower( 0 + gamepad1.right_stick_x);
+//                        robot.backRightMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.backLeftMotor.setPower( 0 + gamepad1.right_stick_x);
 //                    } else if(angle < 292.5) {
-//                        robot.motor0.setPower( joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor1.setPower(-joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor2.setPower(-joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor3.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontLeftMotor.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontRightMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.backRightMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.backLeftMotor.setPower( joystickDistance + gamepad1.right_stick_x);
 //                    } else if(angle < 337.5) {
-//                        robot.motor0.setPower( 0 + gamepad1.right_stick_x);
-//                        robot.motor1.setPower(-joystickDistance + gamepad1.right_stick_x);
-//                        robot.motor2.setPower( 0 + gamepad1.right_stick_x);
-//                        robot.motor3.setPower( joystickDistance + gamepad1.right_stick_x);
+//                        robot.frontLeftMotor.setPower( 0 + gamepad1.right_stick_x);
+//                        robot.frontRightMotor.setPower(-joystickDistance + gamepad1.right_stick_x);
+//                        robot.backRightMotor.setPower( 0 + gamepad1.right_stick_x);
+//                        robot.backLeftMotor.setPower( joystickDistance + gamepad1.right_stick_x);
 //                    }
 //                }
             } else {
-                robot.setDirection(5); //Neutral direction
-                robot.motor0.setPower( gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x);
-                robot.motor1.setPower(-gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x);
-                robot.motor2.setPower(-gamepad1.left_stick_y + gamepad1.left_stick_x - gamepad1.right_stick_x);
-                robot.motor3.setPower( gamepad1.left_stick_y + gamepad1.left_stick_x - gamepad1.right_stick_x);
+                //robot.setDirection(5); //Neutral direction
+                robot.frontLeftMotor.setPower( gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x);
+                robot.frontRightMotor.setPower(-gamepad1.left_stick_y - gamepad1.left_stick_x - gamepad1.right_stick_x);
+                robot.backRightMotor.setPower(-gamepad1.left_stick_y + gamepad1.left_stick_x - gamepad1.right_stick_x);
+                robot.backLeftMotor.setPower( gamepad1.left_stick_y + gamepad1.left_stick_x - gamepad1.right_stick_x);
             }
 
             if(gamepad1.a && !buttons[0]) {
-                orator.orate("dobreeden comrades");
+                orator.orate("dohbreeden comrades");
 
                 buttons[0] = true;
             } else if(!gamepad1.a) {
@@ -173,7 +173,7 @@ public class PunctuationHolonomicDriveOp extends LinearOpMode {
             }
 
             if(gamepad1.b && !buttons[1]) {
-                orator.orate("Shalom");
+                orator.orate("Show me the money");
 
                 buttons[1] = true;
             } else if(!gamepad1.b) {
@@ -181,7 +181,7 @@ public class PunctuationHolonomicDriveOp extends LinearOpMode {
             }
 
             if(gamepad1.x && !buttons[2]) {
-                orator.orate("woof woof. I'm a dog");
+                orator.orate("Oh baby a triple");
 
                 buttons[2] = true;
             } else if(!gamepad1.x) {

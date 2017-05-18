@@ -27,27 +27,27 @@ public class PunctuationTDriveOp extends LinearOpMode {
 
         while (opModeIsActive()) {
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Motor 0", robot.motor0.getDirection() + ", " + robot.motor0.getPower());
-            telemetry.addData("Motor 1", robot.motor1.getDirection() + ", " + robot.motor1.getPower());
-            telemetry.addData("Motor 2", robot.motor2.getDirection() + ", " + robot.motor2.getPower());
-            telemetry.addData("Motor 3", robot.motor3.getDirection() + ", " + robot.motor3.getPower());
+            telemetry.addData("Motor 0", robot.frontLeftMotor.getDirection() + ", " + robot.frontLeftMotor.getPower());
+            telemetry.addData("Motor 1", robot.frontRightMotor.getDirection() + ", " + robot.frontRightMotor.getPower());
+            telemetry.addData("Motor 2", robot.backRightMotor.getDirection() + ", " + robot.backRightMotor.getPower());
+            telemetry.addData("Motor 3", robot.backLeftMotor.getDirection() + ", " + robot.backLeftMotor.getPower());
 
             robot.setDirection(5); //Neutral
-            robot.motor0.setPower( gamepad1.left_stick_x + gamepad1.right_stick_x);
-            robot.motor1.setPower(-gamepad1.left_stick_y + gamepad1.right_stick_x);
-            robot.motor2.setPower(-gamepad1.left_stick_x + gamepad1.right_stick_x);
-            robot.motor3.setPower( gamepad1.left_stick_y + gamepad1.right_stick_x);
+            robot.frontLeftMotor.setPower( gamepad1.left_stick_x + gamepad1.right_stick_x);
+            robot.frontRightMotor.setPower(-gamepad1.left_stick_y + gamepad1.right_stick_x);
+            robot.backRightMotor.setPower(-gamepad1.left_stick_x + gamepad1.right_stick_x);
+            robot.backLeftMotor.setPower( gamepad1.left_stick_y + gamepad1.right_stick_x);
 
 //            if(gamepad1.left_bumper) {
-//                robot.motor0.setPower(1);
-//                robot.motor1.setPower(1);
-//                robot.motor2.setPower(1);
-//                robot.motor3.setPower(1);
+//                robot.frontLeftMotor.setPower(1);
+//                robot.frontRightMotor.setPower(1);
+//                robot.backRightMotor.setPower(1);
+//                robot.backLeftMotor.setPower(1);
 //            } else {
-//                robot.motor0.setPower(0);
-//                robot.motor1.setPower(0);
-//                robot.motor2.setPower(0);
-//                robot.motor3.setPower(0);
+//                robot.frontLeftMotor.setPower(0);
+//                robot.frontRightMotor.setPower(0);
+//                robot.backRightMotor.setPower(0);
+//                robot.backLeftMotor.setPower(0);
 //            }
 //
 //            if(gamepad1.y && !buttons[0]) {

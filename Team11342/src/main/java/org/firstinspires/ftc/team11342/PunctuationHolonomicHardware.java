@@ -30,33 +30,41 @@ public class PunctuationHolonomicHardware {
 
     public DcMotor spinny;
 
+    public DcMotor flippy;
+
     private HardwareMap hwMap;
 
     public void init(HardwareMap hMap) {
         hwMap = hMap;
 
-        motor0 = hwMap.dcMotor.get("motor0");
-        motor1 = hwMap.dcMotor.get("motor1");
-        motor2 = hwMap.dcMotor.get("motor2");
-        motor3 = hwMap.dcMotor.get("motor3");
+        frontLeftMotor = hwMap.dcMotor.get("motor0");
+        frontRightMotor = hwMap.dcMotor.get("motor1");
+        backRightMotor = hwMap.dcMotor.get("motor2");
+        backLeftMotor = hwMap.dcMotor.get("motor3");
 
         spinny = hwMap.dcMotor.get("spinny");
 
-        motor0.setPower(0);
-        motor1.setPower(0);
-        motor2.setPower(0);
-        motor3.setPower(0);
+        flippy = hwMap.dcMotor.get("flippy");
+
+        frontLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        backRightMotor.setPower(0);
+        backLeftMotor.setPower(0);
 
         spinny.setPower(0);
 
-        motor0.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motor3.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        flippy.setPower(0);
+
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         spinny.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        setDirection(0);
+        flippy.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        //setDirection(5);
 
 //        frontLeftMotor = hwMap.dcMotor.get("frontLeft");
 //        frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);

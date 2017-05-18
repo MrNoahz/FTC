@@ -102,7 +102,7 @@ public class ApostropheTester extends LinearOpMode {
     private void checkSpinner() {
         robot.spinny.setPower(0.5);
 
-        sleep(1000);
+        sleep(2000);
 
         robot.spinny.setPower(0);
 
@@ -134,7 +134,7 @@ public class ApostropheTester extends LinearOpMode {
     private void checkLifter() {
         robot.lifty.setPower(0.5);
 
-        sleep(1000);
+        sleep(2000);
 
         robot.lifty.setPower(0);
 
